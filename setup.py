@@ -49,6 +49,7 @@ setup(
     package_dir={'': 'themeZ'},
     packages=find_packages('themeZ'),
     install_requires=[
+        "wagtailmenus >= 2.5.0",
     ],
     extras_require={
         'dev': [

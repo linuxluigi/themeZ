@@ -1,0 +1,118 @@
+{% load themeZ_tags cache compress static i18n wagtailcore_tags wagtailuserbar %}
+{% load menu_tags %}
+{% get_current_language as LANGUAGE_CODE %}
+<!doctype html>
+<html class="no-js" lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>
+        {% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}
+    </title>
+    <meta name="description" content="
+
+
+            {% block meta_description %}{% if self.search_description %}{{ self.search_description }}{% endif %}{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {# extra meta information like canonical #}
+    {% block extra_meta %}{% endblock %}
+
+    <!--  Favicon  -->
+    <link rel="icon" type="image/png" href="{% static 'themeZ/favicon.ico' %}">
+    <link rel="apple-touch-icon" href="{% static 'themeZ/icon.png' %}">
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- font awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    {% compress css %}
+        {# Custom stylesheets #}
+        {# SCSS compilation relies on django compressor #}
+
+        <!-- bootswatch theme -->
+        {% get_bootswatch_theme as bootswatch_theme %}
+        {% with 'themeZ/vendor/bootswatch/dist/'|add:bootswatch_theme|add:'/bootstrap.css' as bootswatch_theme_static %}
+            <link rel="stylesheet" type="text/css" href="{% static bootswatch_theme_static %}">
+        {% endwith %}
+
+        <!-- normalize.css -->
+        <link rel="stylesheet" href="{% static 'themeZ/css/normalize.css' %}">
+
+        <!-- themeZ style -->
+        <link rel="stylesheet" href="{% static 'themeZ/css/main.css' %}">
+
+        {% block extra_css %}{% endblock %}
+        {# Override this block in individual templates in order to add stylesheets on a template by template basis #}
+    {% endcompress %}
+
+    {# Override this block in individual templates in order to add stylesheets from a cdn #}
+    {% block extra_cdn_css %}{% endblock %}
+
+</head>
+
+<body>
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade
+    your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+{% wagtailuserbar %}
+
+<header>
+    {% main_menu max_levels=2 template="themeZ/partials/header/navbar.html" %}
+
+    {% block header %}{% endblock %}
+</header>
+
+{# page content #}
+<div class="container">
+
+    {% block content %}{% endblock %}
+
+</div>
+
+<footer>
+
+</footer>
+
+<!-- bootstrap -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+
+{% compress js %}
+    {# Custom javascript #}
+    {# Local static assets such as css, images and javascrpt should be stored at [yourapp]/static/[yourapp]/... #}
+
+    <!-- modernizr -->
+    <script src="{% static 'themeZ/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="{% static "themeZ/js/vendor/jquery-3.2.1.min.js" %}"><\/script>')</script>
+    <script src="{% static 'themeZ/js/plugins.js' %}"></script>
+
+    <!-- themeZ -->
+    <script src="{% static 'themeZ/js/main.js' %}"></script>
+
+    {# google analytics js script #}
+    {% google_analytics %}
+
+    {% block extra_js %}{% endblock %}
+    {# Override this block in individual templates in order to add javascript on a template by template basis #}
+{% endcompress %}
+
+{% block extra_cdn_js %}{% endblock %}
+{# Override this block in individual templates in order to add javascript from a cdn #}
+
+</body>
+</html>
