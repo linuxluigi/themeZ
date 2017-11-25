@@ -1,0 +1,16 @@
+{% load menu_tags %}
+
+{% if menu_items %}
+    <div class="dropdown-menu" aria-labelledby="ddtoggle_{{ parent_page.pk }}">
+        {% for item in menu_items %}
+            {% if item.has_children_in_menu %}
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{ item.href }}"
+                   id="ddtoggle_{{ item.link_page.pk }}">{{ item.text }} <span
+                        class="caret"></span></a>
+                {% sub_menu item template="themeZ/partials/header/sub_menu_dropdown.html" %}
+            {% else %}
+                <a class="dropdown-item" href="{{ item.href }}">{{ item.text }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}

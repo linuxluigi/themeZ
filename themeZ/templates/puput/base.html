@@ -17,24 +17,13 @@
     <link rel="canonical" href="{% block canonical %}{% canonical_url %}{% endblock %}"/>
 {% endblock %}
 
-{% comment %}
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'puput/css/puput.css' %}"/>
 {% endblock %}
-{% endcomment %}
 
-{% block header %}
-    <div class="about">
-        <div class="container">
-            <section class="title-section">
-                <h1 class="title-header">
-                    <a href="{% pageurl blog_page %}">{{ blog_page.title }}</a>
-                </h1>
-                <h2>{{ blog_page.description }}</h2>
-            </section>
-        </div>
-    </div>
-{% endblock %}
+
+{% block header_title %}{{ blog_page.title }}{% endblock %}
+{% block header_sub_title %}{{ blog_page.description }}{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -95,6 +84,8 @@
     </div>
 {% endblock %}
 
+
 {% block extra_js %}
     <script src="{% static 'puput/js/puput.js' %}"></script>
 {% endblock extra_js %}
+

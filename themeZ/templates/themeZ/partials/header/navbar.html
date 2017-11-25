@@ -1,30 +1,31 @@
-{% load menu_tags %}
+{% load menu_tags themeZ_tags wagtailcore_tags %}
+{% get_site_root as site_root %}
+{% get_site_name as site_name %}
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+    <div class="container">
+        {% if site_name %}
+            <a href="{% pageurl site_root %}" class="navbar-brand">{{ site_name }}</a>
+        {% endif %}
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav mr-auto">
+                {% for item in menu_items %}
+                    <li class="nav-item {{ item.active_class }}{% if item.has_children_in_menu %} dropdown{% endif %}">
+                        {% if item.has_children_in_menu %}
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="{{ item.href }}"
+                               id="ddtoggle_{{ item.link_page.pk }}">{{ item.text }} <span
+                                    class="caret"></span></a>
+                            {% sub_menu item template="themeZ/partials/header/sub_menu_dropdown.html" %}
+                        {% else %}
+                            <a class="nav-link" href="{{ item.href }}">{{ item.text }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-</nav>
+</div>

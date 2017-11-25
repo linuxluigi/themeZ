@@ -1,0 +1,11 @@
+{% load menu_tags themeZ_tags %}
+{% get_site_name as site_name %}
+
+<footer class="footer bg-light">
+    <div class="container">
+        <span class="text-muted ">{{ site_name }} © {% get_copyright_year %}</span>
+        <span class="text-muted pull-right">
+            {% flat_menu "footer" max_levels=1 show_menu_heading=False template="themeZ/partials/footer/footer-menu.html" %}
+        </span>
+    </div>
+</footer>

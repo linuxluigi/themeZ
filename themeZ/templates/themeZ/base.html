@@ -9,10 +9,8 @@
     <title>
         {% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}
     </title>
-    <meta name="description" content="
-
-
-            {% block meta_description %}{% if self.search_description %}{{ self.search_description }}{% endif %}{% endblock %}">
+    <meta name="description" content="{% block meta_description %}
+              {% if self.search_description %}{{ self.search_description }}{% endif %}{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     {# extra meta information like canonical #}
@@ -30,21 +28,20 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
+    <!-- bootswatch theme -->
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.0.0-alpha.6/{% get_bootswatch_theme %}/bootstrap.min.css">
+
     {% compress css %}
         {# Custom stylesheets #}
         {# SCSS compilation relies on django compressor #}
-
-        <!-- bootswatch theme -->
-        {% get_bootswatch_theme as bootswatch_theme %}
-        {% with 'themeZ/vendor/bootswatch/dist/'|add:bootswatch_theme|add:'/bootstrap.css' as bootswatch_theme_static %}
-            <link rel="stylesheet" type="text/css" href="{% static bootswatch_theme_static %}">
-        {% endwith %}
 
         <!-- normalize.css -->
         <link rel="stylesheet" href="{% static 'themeZ/css/normalize.css' %}">
 
         <!-- themeZ style -->
         <link rel="stylesheet" href="{% static 'themeZ/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'themeZ/css/themeZ.css' %}">
 
         {% block extra_css %}{% endblock %}
         {# Override this block in individual templates in order to add stylesheets on a template by template basis #}
@@ -66,26 +63,45 @@
 <header>
     {% main_menu max_levels=2 template="themeZ/partials/header/navbar.html" %}
 
-    {% block header %}{% endblock %}
+    {% block header %}
+        <div class="intro bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="row">
+                    <h1 class="display-4">{% block header_title %}{% endblock %}</h1>
+                </div>
+                <div class="row">
+                    <p class="lead">{% block header_sub_title %}{% endblock %}</p>
+                </div>
+                    </div>
+                    <div class="col-4 pull-right">
+                        {% breadcrumbs %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
 </header>
 
 {# page content #}
-<div class="container">
-
+<main role="main" class="container">
     {% block content %}{% endblock %}
+</main>
 
-</div>
+{% include 'themeZ/partials/footer/footer.html' %}
 
-<footer>
-
-</footer>
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
 
 <!-- bootstrap -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
-        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
-        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
         integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
         crossorigin="anonymous"></script>
 
 {% compress js %}
@@ -96,8 +112,6 @@
     <script src="{% static 'themeZ/js/vendor/modernizr-3.5.0.min.js' %}"></script>
 
     <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script>window.jQuery || document.write('<script src="{% static "themeZ/js/vendor/jquery-3.2.1.min.js" %}"><\/script>')</script>
     <script src="{% static 'themeZ/js/plugins.js' %}"></script>
 

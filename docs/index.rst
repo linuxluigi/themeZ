@@ -7,11 +7,12 @@ Welcome to themeZ's documentation!
 .. include:: intro.rst
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    Installation instructions <install.rst>
-   API documentation <apidoc.rst>
-   Frequently asked questions <faq.rst>
+   Usage <usage/index_usage.rst>
+   Customizing theme <theme/index_theme.rst>
+   Changelog <changelog.rst>
    License <license.rst>
 
 Indices and tables

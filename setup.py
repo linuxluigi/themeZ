@@ -27,7 +27,7 @@ setup(
     version=version,
     author='Steffen Exler',
     author_email='info@linuxluigi.com',
-    url='',
+    url='https://github.com/linuxluigi/themeZ',
     description='A short description for your project.',
     long_description=codecs.open('README.md', 'rb', 'utf8').read(),
 

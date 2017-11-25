@@ -1,0 +1,7 @@
+{% load menu_tags %}
+
+<div class="btn-group" role="group" aria-label="{{ menu_handle }}">
+    {% for item in menu_items %}
+        <button type="button" href="{{ item.href }}" class="btn btn-secondary">{{ item.text }}</button>
+    {% endfor %}
+</div>

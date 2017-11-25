@@ -1,52 +1,18 @@
 # themeZ
 
-http://themez.readthedocs.io/en/latest/
-
-init theme with https://github.com/fabiommendes/python-boilerplate
-
-# Install
-
-INSTALLED_APPS = [
-    ...
-    'wagtail.contrib.modeladmin',  # Don't repeat if it's there already
-    'wagtailmenus',
-]
+[![Pypi version](https://img.shields.io/pypi/v/themeZ.svg)](https://pypi.python.org/pypi/themez/)
+[![Build Status](https://travis-ci.org/linuxluigi/themeZ.svg?branch=master)](https://travis-ci.org/linuxluigi/themeZ)
+[![Docs Status](https://readthedocs.org/projects/themez/badge/?version=latest)](http://themez.readthedocs.io/en/latest/)
+[![Coverage Status](https://readthedocs.org/projects/themez/badge/?version=latest)](http://themez.readthedocs.io/en/latest/)
 
 
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        '   DIRS': [
-            os.path.join(PROJECT_ROOT, 'templates'),
-        ],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.contrib.auth.context_processors.auth',
-                'django.template.context_processors.debug',
-                'django.template.context_processors.i18n',
-                'django.template.context_processors.media',
-                'django.template.context_processors.request',
-                'django.template.context_processors.static',
-                'django.template.context_processors.tz',
-                'django.contrib.messages.context_processors.messages',
-                'wagtail.contrib.settings.context_processors.settings',
-                'wagtailmenus.context_processors.wagtailmenus',
-            ],
-        },
-    },
-]
+ThemeZ is target to be a multi purpose theme for for https://wagtail.io based on Bootstrap 4. It's designed to use with
+https://bootswatch.com for fast developing a site.
 
-# Settings
+It will integrated:
 
-## Settings File
+- Blog: https://github.com/APSL/puput
+- eCommerce: https://github.com/django-oscar/django-oscar
+- Some default pages like StandartPage & ContactPage
 
-- COLOR_STYLE: https://bootswatch.com / Default = minty
-
-## Enviroment vars
-
-- GOOGLE_MAPS_KEY: `UA-XXXXX-Y`
-
-# todo
-
-add layouts https://www.w3schools.com/bootstrap/bootstrap_templates.asp
+Right now, it's just a really early version and should not be used in production.

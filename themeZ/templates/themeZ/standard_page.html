@@ -1,0 +1,14 @@
+{% extends "themeZ/base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block header_title %}{{ self.title }}{% endblock %}
+{% block header_sub_title %}{{ self.intro }}{% endblock %}
+
+{% block content %}
+    {% if self.body %}
+        <div class="body-content">
+            {{ self.body|richtext }}
+        </div>
+    {% endif %}
+{% endblock %}
